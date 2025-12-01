@@ -1,4 +1,3 @@
--- New Store Signups Per Day (Including Days with Zero)
 WITH date_series AS (
   SELECT
     generate_series(

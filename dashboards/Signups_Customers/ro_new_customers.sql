@@ -1,4 +1,3 @@
--- New Customers Per Day (Including 0s)
 WITH date_series AS (
   SELECT
     generate_series(
@@ -8,7 +7,6 @@ WITH date_series AS (
     )::date AS customer_date
 ),
 
--- All store transactions (buyer + seller)
 store_txns AS (
   SELECT buyer_id AS store_id, created_at::date AS tx_date
   FROM public.invoices
@@ -21,7 +19,6 @@ store_txns AS (
   WHERE dwolla_invoice_status = 'COMPLETED'
 ),
 
--- First transaction date per store
 first_tx_per_store AS (
   SELECT
     store_id,
@@ -30,7 +27,6 @@ first_tx_per_store AS (
   GROUP BY store_id
 ),
 
--- Count new customers by first transaction date
 daily_new_customers AS (
   SELECT
     first_tx_date AS customer_date,
